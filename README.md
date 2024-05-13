@@ -20,9 +20,8 @@ Customer {
 - [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
 - [Clean architecture](https://github.com/jasontaylordev/CleanArchitecture)
-- [CQRS](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation#Command_query_responsibility_separation) pattern ([Event sourcing](https://en.wikipedia.org/wiki/Domain-driven_design#Event_sourcing)).
 - Clean git commits that shows your work progress.
-- Use PHP 8.2.x only
+- Use latest PHP only
 - Swagger
 
 ### Validations (Must)
@@ -45,4 +44,4 @@ Customer {
 
 ## Presentation (Nice To Have)
 - Web UI.
-
+- [CQRS](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation#Command_query_responsibility_separation) pattern ([Event sourcing](https://en.wikipedia.org/wiki/Domain-driven_design#Event_sourcing)).
