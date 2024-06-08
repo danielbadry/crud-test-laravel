@@ -76,9 +76,36 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'phone_number' => 'required|unique:customers,phone_number,' . $customer->id,
+            'email' => 'required|email|unique:customers,email,' . $customer->id,
+            'bank_account_number' => 'required|string|unique:customers,bank_account_number,' . $customer->id,
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        // Validate phone number using libphonenumber
+        $phoneUtil = PhoneNumberUtil::getInstance();
+        try {
+            $phoneNumber = $phoneUtil->parse($request->phone_number, "US");
+            if (!$phoneUtil->isValidNumber($phoneNumber)) {
+                return response()->json(['error' => 'Invalid phone number'], 400);
+            }
+        } catch (\libphonenumber\NumberParseException $e) {
+            return response()->json(['error' => 'Invalid phone number format'], 400);
+        }
+
+        $customer->update($request->all());
+        return response()->json($customer, 200);
     }
 
     /**
