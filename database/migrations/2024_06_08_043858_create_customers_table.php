@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->date('date_of_birth');
-            $table->string('phone_number');
-            $table->string('email');
-            $table->string('bank_account_number');
+            $table->string('phone_number')->unique();
+            $table->string('email')->unique();
+            $table->string('bank_account_number')->unique();
             $table->timestamps();
+            $table->unique(['firstname', 'lastname', 'date_of_birth']);
         });
     }
 
