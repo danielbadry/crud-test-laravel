@@ -7,7 +7,21 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/api/customers",
+     *      operationId="getCustomersList",
+     *      tags={"Customers"},
+     *      summary="Get list of customers",
+     *      description="Returns list of customers",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Customer")
+     *      ),
+     *      security={
+     *          {"bearerAuth": {}}
+     *      }
+     * )
      */
     public function index()
     {

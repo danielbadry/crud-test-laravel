@@ -29,6 +29,9 @@ COPY . /var/www
 # Set permissions for storage and cache
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
+# Set environment variable for Composer to allow superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # Install Composer dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
